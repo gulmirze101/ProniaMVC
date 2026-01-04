@@ -1,0 +1,119 @@
+﻿@using Pronia.ViewModels.ProductViewModels
+@model ProductUpdateVM
+
+<div class="container">
+    <div class="row">
+
+        <h2>Update Product</h2>
+
+        
+
+        <form asp-action="Update" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label for="title">Name</label>
+                <input asp-for="Name" class="form-control" id="title" placeholder="Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <input asp-for="Description" class="form-control" id="description" placeholder="Description">
+                <span class="text-danger" asp-validation-for="Description"></span>
+
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" asp-for="MainImagePath" />
+                <img src="~/assets/images/website-images/@Model.MainImagePath" width="50" height="50" />"
+                <label for="MainImage">Main Image</label>
+                <input asp-for="MainImage" class="form-control" id="MainImage" >
+                <span class="text-danger" asp-validation-for="MainImage"></span>
+
+
+            </div>
+
+            <div class="form-group">
+                @foreach(var imagepath in Model.ImagePaths ?? new())
+                {
+                    <input type="hidden" asp-for="ImagePaths" value="@imagepath"/>
+
+                    <div class="image" style="position:relative;width:50px;height:50px;display:inline ">
+                        <img src="~/assets/images/website-images/@imagepath" width="50" height="50" />
+                        <span style="position:absolute;right: 4px;top:-14px;padding 1px;background-color:red;color:white;font size:10px;cursor:pointer;" >X</span>
+
+
+                    </div>
+                    
+                }
+)
+                
+                <label for="Images">Images</label>
+                <input asp-for="Images" class="form-control" id="Images">
+                <span class="text-danger" asp-validation-for="Images"></span>
+
+
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" asp-for="HoverImagePath" />
+                <img src="~/assets/images/website-images/@Model.HoverImagePath" width="50" height="50" />"
+                <label for="HoverImage">Hover Image</label>
+                <input asp-for="HoverImage" class="form-control" id="HoverImage">
+                <span class="text-danger" asp-validation-for="HoverImage"></span>
+
+
+            </div>
+
+            <div class="form-group">
+                <label for="Price">Price</label>
+                <input asp-for="Price" class="form-control" id="Price" placeholder="Price">
+                <span class="text-danger" asp-validation-for="Price"></span>
+
+
+            </div>
+            <div class="form-group">
+                <label for="CategoryId">Select Category</label>
+                <select asp-for="CategoryId" id="CategoryId">
+                    <option value="null" disabled selected>Select Category</option>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                    
+                </select>
+
+
+                <span class="text-danger" asp-validation-for="CategoryId"></span>
+
+
+            </div>
+            <div class="form-group">
+                <label for="TagIds">Tags</label>
+                <select asp-for="TagIds" id="TagIds">
+                    <option value="null" disabled selected>Tag secin</option>
+                    @foreach (Tag tag in ViewBag.Tags)
+                    {
+                        <option value="@tag.Id">@tag.Name</option>
+                    }
+
+                </select>
+
+
+
+
+
+
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button asp-action="Index" class="btn btn-secondary">Cancel</button>
+        </form>
+    </div>
+</div>

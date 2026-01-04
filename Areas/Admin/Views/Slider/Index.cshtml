@@ -1,0 +1,36 @@
+﻿@model List<Slider>
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <a class="btn btn-success" asp-action="Create">Create</a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">OfferPercentage</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Slider slider in Model)
+                {
+                    <tr>
+                        <th scope="row">@slider.Id</th>
+                        <td>@slider.Title</td>
+                        <td>@slider.Description</td>
+                        <td><img src="~/assets/images/website-images/@slider.ImagePath" width="30" height="30" alt="image" /></td>
+                        <td>@slider.OfferPercentage</td>
+                        <td>
+                            <a class="btn btn-warning btn-sm">Update</a>
+                            <a asp-action="Delete" asp-route-id="@slider.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

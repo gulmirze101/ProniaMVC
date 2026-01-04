@@ -1,0 +1,74 @@
+﻿@using Pronia.ViewModels.ProductViewModels
+@model ProductCreateVM
+
+<div class="container">
+    <div class="row">
+        <h2>Create Product</h2>
+
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MainImage"></label>
+                <input asp-for="MainImage" type="file" class="form-control" />
+                <span asp-validation-for="MainImage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HoverImage"></label>
+                <input asp-for="HoverImage" type="file" class="form-control" />
+                <span asp-validation-for="HoverImage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Images"></label>
+                <input asp-for="Images" type="file" multiple class="form-control" />
+                <span asp-validation-for="Images" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryId">Select Category</label>
+                <select asp-for="CategoryId" class="form-control">
+                    <option value="" disabled selected>Select Category</option>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TagIds">Tags</label>
+                <select asp-for="TagIds" multiple class="form-control">
+                    @foreach (var tag in ViewBag.Tags)
+                    {
+                        <option value="@tag.Id">@tag.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="TagIds" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+        </form>
+    </div>
+</div>

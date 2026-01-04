@@ -1,0 +1,24 @@
+﻿@model ServiceFeature
+<div class="container">
+    <div class="row">
+        <form method="post">
+            <div class="form-group">
+                <label for="title">Name</label>
+                <input asp-for="Title" class="form-control" id="title" placeholder="Title">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input asp-for="Description" class="form-control" id="description" placeholder="Description">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="iconPath">IconPath</label>
+                <input asp-for="IconPath" class="form-control" id="iconPath" placeholder="IconPath">
+                <span asp-validation-for="IconPath" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

@@ -7,17 +7,17 @@ namespace Pronia.Models
     public class Slider:BaseEntity
     {
         
-        [MaxLength(20)]
-        [MinLength(3)]
+        //[MaxLength(20)]
+        //[MinLength(3)]
 
         public string Title { get; set; } = null!;
 
         public string? Description { get; set; } = null!;
-        [Required]
+       // [Required]
         public string ImagePath { get; set; } = null!;
 
-        [Range(0,100)]
-        [Precision(5,2)]
+        //[Range(0,100)]
+       // [Precision(5,2)]
         public decimal OfferPercentage { get; set; }
 
     }

@@ -4,7 +4,7 @@ using Pronia.ViewModels.UserViewModels;
 
 namespace Pronia.Controllers
 {
-    public class AccountController(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager) : Controller
+    public class AccountController(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager, RoleManager<IdentityRole> _roleManager) : Controller
     {
         public IActionResult Register()
         {
@@ -50,7 +50,9 @@ namespace Pronia.Controllers
                 }
                 return View(vm);
             }
-            return Ok("Ok");
+
+            await _signInManager.SignInAsync(appUser, false);
+            return RedirectToAction("Index", "Home");
         }
         public IActionResult Login()
         {
@@ -77,7 +79,7 @@ namespace Pronia.Controllers
                 ModelState.AddModelError("", "Email or password is wrong");
                 return View(vm);
             }
-            await _signInManager.SignInAsync(user, false);
+            await _signInManager.SignInAsync(user, vm.IsRemember);
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
@@ -86,5 +88,26 @@ namespace Pronia.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
         }
+
+
+       /* public async Task<IActionResult> CreateRoles()
+        {
+            await _roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "User"
+            });
+            await _roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Admin"
+            });
+            await _roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Moderator"
+            });
+            return Ok("Roles created");
+
+
+
+        }*/
     }
 }
